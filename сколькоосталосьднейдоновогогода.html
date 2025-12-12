@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Счётчик дней</title>
+    <style>
+        body {
+            background-image: url('winterforest.gif');
+            
+            /* Заполняет всю область, игнорируя пропорции */
+            background-size: 100% 100%;
+            
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #f0f0f0;
+        }
+        .counter {
+            font-size: 2.5em;
+            color: #333;
+            margin: 20px 0;
+        }
+        .target-date {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Сколько дней осталось?</h1>
+    <div class="counter" id="daysLeft">...</div>
+    <div class="target-date" id="targetDate">До 1 января 2026 года</div>
+
+    <script>
+        function calculateDaysLeft() {
+                  const targetDate = new Date(2026, 0, 1); // 1 января 2026
+           
+            const today = new Date();
+            
+            const diffTime = targetDate - today;
+
+            const daysLeft = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            document.getElementById('daysLeft').textContent = daysLeft;
+        }
+
+        calculateDaysLeft();
+    </script>
+<P><A HREF=mypage.html>назад</A></P>
+</body>
+</html>

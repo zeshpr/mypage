@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Настенные часы</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-image: url('colorgradient.gif');
+            
+            /* Заполняет всю область, игнорируя пропорции */
+            background-size: 100% 100%;
+            
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #f0f0f0;
+        }
+
+        .content {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+            font-size: 24px;
+        }
+    </style>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .clock {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: white;
+            border: 10px solid #333;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .clock::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background-color: #333;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .dial {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .mark {
+            position: absolute;
+            width: 4px;
+            height: 12px;
+            background-color: #333;
+            left: 50%;
+            transform-origin: 50% 150px;
+        }
+
+        .mark:nth-child(1)  { transform: rotate(30deg); }
+        .mark:nth-child(2)  { transform: rotate(60deg); }
+        .mark:nth-child(3)  { transform: rotate(90deg); }
+        .mark:nth-child(4)  { transform: rotate(120deg); }
+        .mark:nth-child(5)  { transform: rotate(150deg); }
+        .mark:nth-child(6)  { transform: rotate(180deg); }
+        .mark:nth-child(7)  { transform: rotate(210deg); }
+        .mark:nth-child(8)  { transform: rotate(240deg); }
+        .mark:nth-child(9)  { transform: rotate(270deg); }
+        .mark:nth-child(10) { transform: rotate(300deg); }
+        .mark:nth-child(11) { transform: rotate(330deg); }
+
+        .hand {
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            transform-origin: 50% 100%;
+            border-radius: 4px;
+            transform: rotate(90deg);
+        }
+
+        .hour-hand {
+            width: 8px;
+            height: 80px;
+            background-color: #333;
+            z-index: 8;
+        }
+
+        .minute-hand {
+            width: 6px;
+            height: 110px;
+            background-color: #666;
+            z-index: 9;
+        }
+
+        .second-hand {
+            width: 2px;
+            height: 130px;
+            background-color: red;
+            z-index: 7;
+        }
+
+        .center-cap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background-color: #333;
+            border-radius: 50%;
+            z-index: 11;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="dial">
+            <!-- 12 часовых меток -->
+            <div class="mark"></div>
+            <div class="mark"></div>
+            <div class="mark"></div>
+            <div class="mark"></div>
+            <div class="mark"></div>
+            <div class="mark"></div>
+            <div class="mark"></div>
+            <div class="mark"></div>
+            <div class="mark"></div>
+            <div class="mark"></div>
+            <div class="mark"></div>
+            <div class="mark"></div>
+        </div>
+
+        <!-- Стрелки -->
+        <div class="hand hour-hand"></div>
+        <div class="hand minute-hand"></div>
+        <div class="hand second-hand"></div>
+
+        <!-- Центральная заглушка -->
+        <div class="center-cap"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Получаем текущее время
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours() % 12; // 12-часовой формат
+            
+            // Рассчитываем углы поворота
+            const secondAngle = (seconds / 60) * 360;
+            const minuteAngle = ((minutes + seconds / 60) / 60) * 360;
+            const hourAngle = ((hours + minutes / 60) / 12) * 360;
+            
+            // Применяем повороты к стрелкам
+            document.querySelector('.second-hand').style.transform = `rotate(${secondAngle}deg)`;
+            document.querySelector('.minute-hand').style.transform = `rotate(${minuteAngle}deg)`;
+            document.querySelector('.hour-hand').style.transform = `rotate(${hourAngle}deg)`;
+        }
+
+        setInterval(updateClock, 1000);
+
+        updateClock();
+    </script>
+
+
+
+
+
+
+
+
+<P><A HREF=моипроекты.html>назад</A></P>
+</body>
+</html>
